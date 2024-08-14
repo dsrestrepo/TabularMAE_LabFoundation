@@ -16,12 +16,31 @@ This repository is organized as follows:
   - **mae_imputer_inference_demo.ipynb**: Explores how to use the trained MAE model for data imputation.
   - **mae_imputer_training_demo.ipynb**: Provides an in-depth walkthrough of training the MAE model on a custom dataset.
 - **imput_format.csv**: Sample csv with the format for training the MAE model or for inference.
+- **requirements.txt**: Contains the required libraries for running the scripts.
 
 ## Getting Started
 
 ### Prerequisites
 
 Before running the scripts, ensure that you have the required libraries installed. You can install them using `pip`:
+
+The code was created using Python 3.9.13. create a virtual environment and install the required libraries using the following commands:
+
+with venv:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+or with conda:
+
+```bash
+conda create -n venv python=3.9.13
+conda activate venv
+```
+
+Then, install the required libraries:
 
 ```bash
 pip install -r requirements.txt
