@@ -105,9 +105,10 @@ imputer.norm_parameters = loaded_norm_parameters
 ################ Test the model ################
 def test_model(imputer, df_test, exclude_columns=[], eval_batch_size=32, predictions_file='results_test_predictions_test_100k.csv', ignore_previous=True, baseline=True):
     # Initialize the DataFrame to store predictions
-    df_predictions = df_test.copy()
+    columns_ignored_df = df_test[CLOUMNS_IGNORE]
+    df_test = df_test.drop(CLOUMNS_IGNORE, axis=1)
     
-    df_predictions = df_predictions.drop(CLOUMNS_IGNORE, axis=1)
+    df_predictions = df_test.copy()
     
     ItemID = 0
     for column, column_name in enumerate(tqdm(df_test.columns, desc="Processing columns")):
@@ -172,11 +173,10 @@ def test_model(imputer, df_test, exclude_columns=[], eval_batch_size=32, predict
         
     # Add columns ignored
     for column_name in CLOUMNS_IGNORE:
-        df_predictions[column_name] = df_test[column_name]
+        df_predictions[column_name] = columns_ignored_df[column_name]
     
     # Save the final DataFrame to CSV
     df_predictions.to_csv(predictions_file, index=False)
-
 
 # Evaluate and save results
 test_model(imputer, df_test)
