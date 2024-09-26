@@ -72,7 +72,7 @@ df_test = df_test[:100000]
 
 
 # Create a list of columns to ignore
-columns_ignore = ['first_race', 'chartyear', 'hadm_id']
+CLOUMNS_IGNORE = ['first_race', 'chartyear', 'hadm_id']
 
 
 ################ Create Imputer Instance ################
@@ -107,6 +107,8 @@ def test_model(imputer, df_test, exclude_columns=[], eval_batch_size=32, predict
     # Initialize the DataFrame to store predictions
     df_predictions = df_test.copy()
     
+    df_predictions = df_predictions.drop(CLOUMNS_IGNORE, axis=1)
+    
     ItemID = 0
     for column, column_name in enumerate(tqdm(df_test.columns, desc="Processing columns")):
         # Columns with time
@@ -131,7 +133,7 @@ def test_model(imputer, df_test, exclude_columns=[], eval_batch_size=32, predict
         X_test_masked = X_test_real.copy()
         # Mask all values in that column with NaN
         X_test_masked.iloc[:, column] = np.nan
-
+        
         ################ Impute the values using MAE ################
         print(f'Imputing column: {column_name} using MAE')
         
@@ -145,10 +147,6 @@ def test_model(imputer, df_test, exclude_columns=[], eval_batch_size=32, predict
         # Create a new column with the imputed values from the MAE model
         df_predictions.loc[df_test[column_name].notna(), imputed_column_name] = X_test_imputed[:, column]
         
-        
-        
-        # Save the predictions column to the CSV file
-        #df_predictions[[imputed_column_name]].to_csv(predictions_file, mode='a', header=False, index=False)
         
         ################ Impute the values using the baseline ################
         # Impute the values:
@@ -170,19 +168,15 @@ def test_model(imputer, df_test, exclude_columns=[], eval_batch_size=32, predict
             # Create a new column with the imputed values from the MAE model
             df_predictions.loc[df_test[column_name].notna(), imputed_column_name] = X_test_imputed
             
-            # Save the predictions column to the CSV file
-            #df_predictions[[imputed_column_name]].to_csv(predictions_file, mode='a', header=False, index=False)
-            
             ItemID += 1
         
-        # Fill the masked column with the imputed values
-        #df_predictions.loc[df_test[column_name].notna(), column_name] = X_test_imputed[:, column]
-        # Save the predictions column to the CSV file
-        #df_predictions[[column_name]].to_csv(predictions_file, mode='a', header=False, index=False)
-        
+    # Add columns ignored
+    for column_name in CLOUMNS_IGNORE:
+        df_predictions[column_name] = df_test[column_name]
+    
     # Save the final DataFrame to CSV
     df_predictions.to_csv(predictions_file, index=False)
 
 
 # Evaluate and save results
-test_model(imputer, df_test.drop(columns_ignore, axis=1))
+test_model(imputer, df_test)
