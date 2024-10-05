@@ -1,8 +1,10 @@
 # Ignore CSV files
 *.csv
 !imput_format.csv
-*/
 #!100_Labs_Train_0.25Mask_L_V3
+*/
+
+!results/*.csv
 
 # macOS
 .DS_Store

@@ -11,12 +11,15 @@ This repository is organized as follows:
 - **run_mae.py**: Script to train the MAE model on the provided dataset.
 - **run_embedding.py**: Script to extract embeddings from the trained MAE model.
 - **run_test_mae.py**: Script to test the MAE model's performance on a given dataset.
+- **run_test_mae_race.py**: Script to test the MAE model's performance for the paper vs XGBoost models on a given test set and compare performance overall and per race.
+- **run_test_mae_race_follow_up.py**: Script to test the MAE model's performance for the paper vs XGBoost models on a given test set and compare performance with a follow-up data and without follow-up data overall and per race.
 - **Notebook Demos**:
   - **mae_demo.ipynb**: Demonstrates the basic usage of the MAE model, including training and testing.
   - **mae_imputer_inference_demo.ipynb**: Explores how to use the trained MAE model for data imputation.
   - **mae_imputer_training_demo.ipynb**: Provides an in-depth walkthrough of training the MAE model on a custom dataset.
 - **imput_format.csv**: Sample csv with the format for training the MAE model or for inference.
 - **requirements.txt**: Contains the required libraries for running the scripts.
+- **results**: Directory with the results of the model on the test set for the paper vs XGBoost models. In the directory, there are the results for the overall performance, and the per race performance. You can find the results for the follow-up data and without follow-up data. In the notebook, you'll also see some demo results for the first 3 lab values for a cohor of 10k patients in the test set. Full results were calculated for 100 laboratoy tests on a cohort of 100k patients.
 
 ## Getting Started
 
