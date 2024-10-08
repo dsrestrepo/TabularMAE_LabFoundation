@@ -59,6 +59,14 @@ python run_mae.py
 
 This script will train the model on the provided dataset, saving the model weights and other relevant training artifacts.
 
+### Use the Lab-MAE Checkpoint
+
+If you want to use the model pre-trained on over 1.4M data points from MIMIC, you need the checkpoint file and normalization parameters. You can download them from the following link:
+
+[Lab-MAE Checkpoint](https://drive.google.com/drive/folders/1i_hdYGcB0mi0L8BJTYSI4VU-GKSaQIAo?usp=sharing)
+
+Download the files and place them in your checkpoint directory. 
+
 ### Extracting Embeddings
 Once the model is trained, you can extract embeddings using:
 
@@ -75,6 +83,24 @@ python run_test_mae.py
 ```
 
 This script will provide metrics such as Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE) for the imputation task.
+
+If you want to compare the performance of the MAE model with the XGBoost model, you can run the following scripts:
+
+- For the paper vs XGBoost models overall and per race:
+
+```bash
+python run_test_mae_race.py
+```
+
+- For the paper vs XGBoost models with follow-up data and without follow-up data:
+
+```bash
+python run_test_mae_race_follow_up.py
+```
+
+These scripts will output the MAE and RMSE for the MAE model and the XGBoost model, comparing the performance. To use the XGBoost model, you need to have the XGBoost model checkpoint files. You can download it from the following link:
+
+[XGBoost Checkpoints](https://drive.google.com/drive/folders/1EGJlWUqcQpV46G2_R0LxxdZ-saDlzeNC?usp=sharing)
 
 ## Notebook Demos
 

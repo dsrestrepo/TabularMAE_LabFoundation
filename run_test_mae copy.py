@@ -47,8 +47,6 @@ missing_per_col = 500
 
 df_test, _ = clean_missing(df_test, missing_per_row, cols_to_remove=[])
 
-df_test = df_test[:50000]
-
 
 # Create a list of columns to ignore
 columns_ignore = ['first_race', 'chartyear', 'hadm_id']
@@ -123,7 +121,7 @@ def test_model(imputer, df_test, exclude_columns=[], eval_batch_size=32):
         output_str = f"Evaluation for {column_name}: RMSE = {rmse}, MAE = {mae}, R2 = {r2}\n"
 
         """ Here if we wanna se the outputs per test: """
-        print(output_str)
+        #print(output_str)
 
         epoch_validation_results.append({
             'Column': column_name,
